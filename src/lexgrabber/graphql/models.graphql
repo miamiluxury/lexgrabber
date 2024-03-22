@@ -1,5 +1,5 @@
 query {
-  models(zipCd: "ZIPCODE", brand: "L") {
+  models(zipCd: "ZIPCODE", brand: "LEXUS") {
     asShown
     cityMPG
     disclaimer
