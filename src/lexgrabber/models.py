@@ -4,7 +4,7 @@ import json
 import pandas as pd
 import requests
 
-from lexgrabber import config
+from lexgrabber import config , wafbypass
 
 # Set to True to use local data and skip requests to the Toyota website.
 USE_LOCAL_DATA_ONLY = False
@@ -37,7 +37,7 @@ def query_toyota():
     # Get headers by bypassing the WAF.
     headers = wafbypass.WAFBypass().run()
     # Make request.
-    
+
     json_post = {"query": query}
     url = "https://api.search-inventory.toyota.com/graphql"
     resp = requests.post(
