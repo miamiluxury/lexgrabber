@@ -29,14 +29,15 @@ def read_local_data():
 
     return result
 
-    # Get headers by bypassing the WAF.
-    headers = wafbypass.WAFBypass().run()
+
 
 def query_toyota():
     """Query Toyota for a list of models."""
     query = get_models_query()
-
+    # Get headers by bypassing the WAF.
+    headers = wafbypass.WAFBypass().run()
     # Make request.
+    
     json_post = {"query": query}
     url = "https://api.search-inventory.toyota.com/graphql"
     resp = requests.post(
