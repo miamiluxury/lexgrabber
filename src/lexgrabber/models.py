@@ -29,6 +29,8 @@ def read_local_data():
 
     return result
 
+    # Get headers by bypassing the WAF.
+    headers = wafbypass.WAFBypass().run()
 
 def query_toyota():
     """Query Toyota for a list of models."""

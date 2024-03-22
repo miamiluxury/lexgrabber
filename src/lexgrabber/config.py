@@ -24,12 +24,12 @@ def random_zip_code():
     return [x for x in zip_codes][0].strip()
 
 
-def get_headers():
-    """Get the headers used when making requests to the Toyota website."""
-    headers = {
-        "origin": "https://www.lexus.com",
-        "referrer": "https://www.lexus.com/",
-        "user-agent": random_user_agent(),
-        "accept": "*/*",
-    }
-    return headers
+#def get_headers():
+ #   """Get the headers used when making requests to the Toyota website."""
+  #  headers = {
+   #     "origin": "https://www.lexus.com",
+    #    "referrer": "https://www.lexus.com/",
+     #   "user-agent": random_user_agent(),
+      #  "accept": "*/*",
+    #}
+    #return headers
