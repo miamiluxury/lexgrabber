@@ -6,7 +6,7 @@ on:
   # pull_request:
   #   branches: ["main"]
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "0 10 * * 1,3,5"
   workflow_dispatch:
 
 permissions:
@@ -39,16 +39,20 @@ jobs:
           python-version: "3.11"
           cache: poetry
 
-            - name: Cache playwright browsers
+      - name: Cache playwright browsers
         uses: actions/cache@v3
         id: playwright-cache
         with:
           path: |
             ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright    
+          key: ${{ runner.os }}-playwright
 
       - name: Install dependencies
         run: poetry install --only main
+
+      - name: Install playwright browsers
+        run: poetry run playwright install firefox
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Get the latest models
         run: poetry run update_models
@@ -105,15 +109,27 @@ jobs:
           python-version: "3.11"
           cache: poetry
 
+      - name: Cache playwright browsers
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright
+
       - name: Install dependencies
         run: poetry install --only main
+
+      - name: Install playwright browsers
+        run: poetry run playwright install firefox
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Get vehicles matching model
         run: poetry run update_vehicles
         env:
           PYTHONUNBUFFERED: 1
 
-      - name: Store vehicle data in artifact
+      - name: Store image data in artifact
         uses: actions/upload-artifact@v3
         with:
           name: "output"
