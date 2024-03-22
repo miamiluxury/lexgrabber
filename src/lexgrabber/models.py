@@ -42,7 +42,7 @@ def query_toyota():
     resp = requests.post(
         url,
         json=json_post,
-        headers=config.get_headers(),
+        headers=headers,
         timeout=15,
     )
 
